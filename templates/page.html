@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page">
+<h3><a href="/{{page.slug}}">{{page.title}}</a></h3>
+<div class="body">
+	{{page.body_html}}
+<div class="tags">
+	{% for tag in page.tags %}
+		<a href="/topic/{{tag}}">{{tag}}</a>, 
+	{% endfor %}
+</div><!-- tags --s>
+</div><!-- body -->
+</div><!-- entry -->
+{% endblock %}
