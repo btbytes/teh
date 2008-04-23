@@ -1,16 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
-<p>Welcome to the home page of Teh</p>
-{% if users.is_current_user_admin %}
-	<p><a href="/new">Go to admin area</a></p>
-{% endif %}
-<hr/>
+<p>Teh is a minimalist blog app written using Google App Engine.</p>
+<p><em>Source</em>: http://github.com/btbytes/teh/tree/master </p>
+<p><em>Docs</em>: On the way</p>
 {% for entry in entries %}
 	<div class="entry">
 		<h3><a href="/entry/{{entry.slug}}">{{entry.title}}</a></h3>
 		<div class="date">{{entry.published.date}}</div>
 		<div class="body">
-			{{entry.body}}
+			<p>{{entry.excerpt}}</p>
 		</div><!-- body -->
 		</div><!-- entry -->
 {% endfor %}
