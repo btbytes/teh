@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<p>Welcome to the home page of Teh</p>
+{% if users.is_current_user_admin %}
+	<p><a href="/new">Go to admin area</a></p>
+{% endif %}
+<hr/>
+{% for entry in entries %}
+	<div class="entry">
+		<h3><a href="/entry/{{entry.slug}}">{{entry.title}}</a></h3>
+		<div class="date">{{entry.published.date}}</div>
+		<div class="body">
+			{{entry.body}}
+		</div><!-- body -->
+		</div><!-- entry -->
+{% endfor %}
+{% endblock %}

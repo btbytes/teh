@@ -1,0 +1,114 @@
+{% extends "formbase.html" %}
+
+{% block content %}
+
+<h1 id="logo"><a>TEH</a></h1>
+
+<form id="form5" class="wufoo topLabel" autocomplete="off"
+enctype="multipart/form-data" method="post" action="#public">
+
+<div class="info">
+<h2>New Entry</h2>
+<p>create a new blog entry.</p>
+</div>
+
+<ul>
+<li id="fo5li0" class="   " >
+
+<label class="desc" id="title0" for="Field0">
+Title
+<span id="req_0" class="req">*</span>
+</label>
+
+<div>
+<input id="title" 
+class="field text large"
+name="title" 
+tabindex="1"
+type="text" maxlength="255" value="" 
+  /> 
+</div>
+
+
+
+</li>
+
+<li class="   " id="fo5li1" >
+
+<label id="title1" class="desc" for="body">
+Content
+<span id="req_1" class="req">*</span>
+</label>
+
+<div>
+
+<textarea id="body" 
+class="field textarea large"
+name="body" 
+rows="10" cols="50" 
+tabindex="2"  ></textarea>
+</div>
+
+<p class="instruct " id="instruct1"><small>You can use markdown, reStructuredText or Textile.</small></p>
+
+
+</li>
+
+<li class="   " id="fo5li3" >
+
+<label class="desc" id="title3" for="markup">
+Markup
+</label>
+
+<div>
+
+<select class="field select medium" 
+id="markup" 
+name="markup"
+tabindex="3"  > 
+<option value="Markdown" 
+>Markdown</option>
+<option value="Textile" 
+>Textile</option>
+<option value="Plain " 
+>Plain </option>
+</select>
+</div>
+
+
+
+</li>
+
+<li id="fo5li5" class="   " >
+
+<label class="desc" id="title5" for="tags">
+
+Tags
+</label>
+
+<div>
+<input id="tags" 
+class="field text large"
+name="tags" 
+tabindex="4"
+type="text" maxlength="255" value="" 
+  /> 
+</div>
+
+<p class="instruct " id="instruct5"><small>Tags, separated by space</small></p>
+
+
+</li>
+
+
+<li class="buttons">
+<input id="saveForm" class="btTxt" type="submit" tabindex="5" value="Submit"  />
+</li>
+
+<li style="display:none">
+<label for="comment">Do Not Fill This Out</label>
+<textarea name="comment" id="comment" rows="1" cols="1"></textarea>
+</li>
+</ul>
+</form>
+{% endblock %}

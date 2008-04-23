@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+<title>
+	{% block title %}
+	New Entry
+	{% endblock %}
+</title>
+
+<!-- Meta Tags -->
+<meta name="robots" content="index, nofollow, noarchive" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<!-- CSS -->
+<link rel="stylesheet" href="/static/css/forms/dynamic.css" type="text/css" />
+
+<!-- JavaScript -->
+<script type="text/javascript" src="/static/scripts/dynamic.js"></script>
+</head>
+
+<body id="public">
+
+<img id="top" src="/static/images/top.png" alt="" />
+<div id="container">
+{% block content %}
+
+{% endblock %}
+</div><!--container-->
+<img id="bottom" src="/static/images/bottom.png" alt="" />
+</body>
+</html>

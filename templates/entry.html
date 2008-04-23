@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="entry">
+<h3><a href="/entry/{{entry.slug}}">{{entry.title}}</a></h3>
+<div class="date">{{entry.published.date}}</div>
+<div class="body">
+	{{entry.body}}
+</div><!-- body -->
+</div><!-- entry -->
+{% endblock %}
