@@ -1,0 +1,15 @@
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title>teh - minimalist blog tool </title>
+    <id>http://teh.appspot.com/feed</id>
+    <link href="http://teh.appspot.com/feed" rel="self" />
+    <updated>{{latest.updated}}</updated>
+{% for post in entries %}
+  <entry>
+      <id>http://teh.appspot.com/entry/{{post.slug}}</id>
+      <title>{{post.title}}</title>
+      <content type="html">{{post.body_html}}</content>
+      <author><name>{{post.author}}</name></author>
+      <updated>{{post.updated}}</updated>
+  </entry>
+{% endfor %}
+</feed>
