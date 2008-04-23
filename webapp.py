@@ -39,6 +39,11 @@ class MainPageHandler(TehRequestHandler):
         entries = db.Query(Entry).order('-published').fetch(limit=5)
         self.render("templates/main.html", entries=entries, users=users)
 
+class EntryIndexHandler(TehRequestHandler):
+    def get(self):
+        entries = db.Query(Entry).order('-published').fetch(limit=5)
+        self.render("templates/entryindex.html", entries=entries, users=users)
+
 class EntryHandler(TehRequestHandler):
     def get(self, slug):
         entry = db.Query(Entry).filter("slug =", slug).get()
@@ -102,7 +107,7 @@ class LogoutHandler(TehRequestHandler):
 def main():
     application = webapp.WSGIApplication([
         (r"/", MainPageHandler),
-        #(r"/index", IndexHandler),
+        (r"/entries", EntryIndexHandler),
         (r"/feed", FeedHandler),
         (r"/entry/([^/]+)", EntryHandler),
         (r"/new", NewEntryHandler),

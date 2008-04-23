@@ -5,10 +5,9 @@
 	<p><a href="/new">Go to admin area</a></p>
 {% endif %}
 <hr/>
+<ul>
 {% for entry in entries %}
-	<div class="entry">
-		<p><a href="/entry/{{entry.slug}}">{{entry.title}}</a></p>
-	</div><!-- entry -->
+	<li><a href="/entry/{{entry.slug}}">{{entry.title}}</a></li>
 {% endfor %}
-</div><!-- full -->
+</ul>
 {% endblock %}
