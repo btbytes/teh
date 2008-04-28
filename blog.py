@@ -31,6 +31,24 @@ class Entry(db.Model):
     tags = db.ListProperty(db.Category)
     static = db.BooleanProperty()
     
+    def url(self):
+        if self.static == False: return '/entry/'+self.slug
+        else: return '/'+self.slug
+    
+def administrator(method):
+    @functools.wraps(method)
+    def wrapper(self, *args, **kwargs):
+        user = users.get_current_user()
+        if not user:
+            if self.request.method == "GET":
+                self.redirect(users.create_login_url(self.request.uri))
+                return
+        if not users.is_current_user_admin():
+            raise webapp.Error(403)
+        else:
+            return method(self, *args, **kwargs)
+    return wrapper
+
 class EntryIndexHandler(TehRequestHandler):
     def get(self):
         entries = Entry.all().filter("static =", False)
@@ -40,17 +58,38 @@ class EntryIndexHandler(TehRequestHandler):
 
 class EntryHandler(TehRequestHandler):
     def get(self, slug):
-        entry = db.Query(Entry).filter("slug =", slug).get()
+        admin = users.is_current_user_admin()
+        entry = db.Query(Entry).filter("slug =", slug).filter("static = ", False).get()
         if not entry:
             raise webapp.Error(404)
-        self.render("templates/entry.html", entry=entry)
+        self.render("templates/entry.html", entry=entry,admin=admin)
+        
+class EntryDeleteHandler(TehRequestHandler):
+        @administrator
+        def get(self,slug):
+            entry = db.Query(Entry).filter("slug =", slug).get()
+            if not entry:
+                raise webapp.Error(404)
 
+            self.render("templates/del.html", entry=entry)
+
+        @administrator
+        def post(self,slug):
+            entry = db.Query(Entry).filter("slug =", slug).get()
+            if not entry:
+                raise webapp.Error(404)
+            delete = self.request.get("del")
+            if delete and delete.upper() == 'Y':
+                entry.delete()
+            self.redirect('/entries')
+                
 class PageHandler(TehRequestHandler):
     def get(self, slug):
-        page = db.Query(Entry).filter("slug =", slug).filter("static =", True).get()
-        if not page:
+        admin = users.is_current_user_admin()
+        entry = db.Query(Entry).filter("slug =", slug).filter("static =", True).get()
+        if not entry:
             raise webapp.Error(404)
-        self.render("templates/page.html", page=page)
+        self.render("templates/page.html", entry=entry,admin=admin)
 
 class TagHandler(TehRequestHandler):
     def get(self, slug):
@@ -73,33 +112,30 @@ class FeedHandler(TehRequestHandler):
         self.response.headers['Content-Type'] = 'application/atom+xml'
         self.render("templates/atom.xml", entries=entries, latest=latest)
 
-def administrator(method):
-    @functools.wraps(method)
-    def wrapper(self, *args, **kwargs):
-        user = users.get_current_user()
-        if not user:
-            if self.request.method == "GET":
-                self.redirect(users.create_login_url(self.request.uri))
-                return
-        if not users.is_current_user_admin():
-            raise webapp.Error(403)
-        else:
-            return method(self, *args, **kwargs)
-    return wrapper
+def to_html(body,markdown):
+    if markdown == 'markdown':
+        body_html = markdown2.markdown(body)
+    else:
+        body_html = body
+    return body_html
+    
 
 class NewEntryHandler(TehRequestHandler):
     @administrator
-    def get(self):
-        self.render("templates/new.html")
-
+    def get(self,slug=None):
+        if slug:
+            entry = db.Query(Entry).filter("slug =", slug).get()
+            if not entry:
+                raise webapp.Error(404)
+            self.render("templates/new.html", entry=entry)
+        else: self.render("templates/new.html")
+        
     @administrator
-    def post(self):
+    def post(self,slug=None):
         title = self.request.get("title")
         body = self.request.get("body")
         markdown = self.request.get("markup")
-        excerpt = self.request.get("excerpt")
         st  = self.request.get("static")
-        
         if st == '1':
             static = True
         else:
@@ -111,27 +147,39 @@ class NewEntryHandler(TehRequestHandler):
             tags = ['general']
         tags = [db.Category(utils.slugify(tag)) for tag in tags if tag]
 
-        if markdown == 'markdown':
-            body_html = markdown2.markdown(body)
-        else:
-            body_html = body
+        body_html = to_html(body,markdown)
 
-        if not excerpt:
-            soup = BeautifulSoup.BeautifulSoup(body_html)
-            paras = soup.findAll('p')
-            if paras:
-                excerpt = paras[0].string
-                
-        entry = Entry(
-            author=users.get_current_user(),
-            title=title,
-            slug=utils.slugify(title),
-            body=body,
-            body_html=body_html,
-            markdown=markdown,
-            excerpt=excerpt,
-            tags=tags,
-            static=static,
-        )
+        soup = BeautifulSoup.BeautifulSoup(body_html)
+        paras = soup.findAll('p')
+        
+        if paras:
+            excerpt = paras[0].string
+        else: excerpt = ''
+        
+        entry = db.Query(Entry).filter("slug =", slug).get()
+        if not entry:
+            entry = Entry(
+                author=users.get_current_user(),
+                title=title,
+                slug=utils.slugify(title),
+                body=body,
+                body_html=body_html,
+                markdown=markdown,
+                excerpt=excerpt,
+                tags=tags,
+                static=static,
+            )
+        else:
+            entry.title = title
+            entry.body = body
+            entry.body_html = body_html
+            entry.excerpt = excerpt
+            entry.static = static
+            entry.tags = tags
+            
         entry.put()
-        self.redirect("/entry/" + entry.slug)
+        
+        if static:
+            self.redirect('/'+entry.slug)
+        else:
+            self.redirect("/entry/" + entry.slug)
