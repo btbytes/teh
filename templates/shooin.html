@@ -4,8 +4,8 @@
 {% endblock %}
 
 {% block content %}
-<p>Data Import file: {{fname}}</p>
-<pre><code>
-	{{data}}
-</code></pre>
+<p>Data Import file: /static/data/{{fname}}.json</p>
+{% for title in titles %}
+	<li>{{title}}</li>
+{% endfor %}
 {% endblock %}

@@ -2,37 +2,58 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<title>TEH - minimalist blog tool powered by Google App Engine</title>
+<title>
+	{% block title %}
+		TEH - minimalist blog tool powered by Google App Engine
+	{% endblock %}
+</title>
 {% block css %}
 	<link href="/static/css/base.css" rel="stylesheet" type="text/css"/>
 {% endblock %}
 
-<link rel="alternate" href="http://feeds.feedburner.com/tehblogapp" type="application/atom+xml" title="Teh blog"/>
+<link rel="alternate" href="http://teh.appspot.com/feed" type="application/atom+xml" title="Teh blog"/>
 </head>
+
 <body>
 <div id="header">
-<div id="logo"><a href="/"><img src="/static/images/logo.png" alt="Teh blog"/></a> 
-</div>
-<div id="feed"><a href="http://feeds.feedburner.com/tehblogapp"><img src="/static/images/feed.png" alt="Subscribe to this blog"/></a></div>
-<div id="search">
-<form action="http://www.google.com/search" method="get">
-<div>
-<input name="q" size="20" type="text"/>
-<input type="submit" value="Search"/>
-<input name="domains" type="hidden" value="teh.appspot.com"/>
-<input name="sitesearch" type="hidden" value="teh.appspot.com"/>
-</div>
-</form>
-</div>
-</div>
+	<div id="logo">
+		<a href="/"><img src="/static/images/logo.png" alt="Teh blog"/></a> 
+	</div><!-- logo -->
+	<div id="feed"><a href="http://teh.appspot.com/feed">
+		<img src="/static/images/feed.png" alt="Subscribe to this blog"/></a>
+	</div><!-- feed -->
+
+	<div id="search">
+		<form action="http://www.google.com/search" method="get">
+			<div>
+				<input name="q" size="20" type="text"/>
+				<input type="submit" value="Search"/>
+				<input name="domains" type="hidden" value="teh.appspot.com"/>
+				<input name="sitesearch" type="hidden" value="teh.appspot.com"/>
+			</div>
+		</form>
+	</div><!-- search -->
+</div><!-- header -->
+
 <div id="body">
 <div class="full">
+
+{% if message %}
+	{% block message %}
+		{{message}}
+	{% endblock %}
+{% endif %}
+
 {% block content %}
 {% endblock %}
 </div><!-- full -->
+
 <div><a href="/entries">All posts &raquo;</a></div>
+</div><!-- body -->
+
+<div id="footer">
+	&copy;2008 Teh blog - <a href="/about">About Teh</a> - <a href="http://creativecommons.org/licenses/by/2.5/">Creative Commons License</a>
 </div>
-<div id="footer">&copy;2008 Teh blog - <a href="/about">About Teh</a> - <a href="http://creativecommons.org/licenses/by/2.5/">Creative Commons License</a></div>
 <!-- 
 	Layout for Teh blog app - http://teh.appspot.com
 	Derived from - http://bret.appspot.com

@@ -1,13 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
-<p>Welcome to the home page of Teh</p>
-{% if users.is_current_user_admin %}
-	<p><a href="/new">Go to admin area</a></p>
-{% endif %}
-<hr/>
+
 <ul>
 {% for entry in entries %}
-	<li><a href="/entry/{{entry.slug}}">{{entry.title}}</a></li>
+	<li><a href="{{entry.url}}">{{entry.title}}</a></li>
 {% endfor %}
 </ul>
 {% endblock %}

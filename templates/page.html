@@ -1,14 +1,20 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="page">
-<h3><a href="/{{page.slug}}">{{page.title}}</a></h3>
+<div class="entry">
+<h3><a href="{{entry.url}}">{{entry.title}}</a></h3>
+{% block date %}{% endblock %}
 <div class="body">
-	{{page.body_html}}
+	{{entry.body_html}}
 <div class="tags">
-	{% for tag in page.tags %}
+	{% for tag in entry.tags %}
 		<a href="/topic/{{tag}}">{{tag}}</a>, 
 	{% endfor %}
-</div><!-- tags --s>
+</div><!-- tags -->
 </div><!-- body -->
+<div id="controls">
+	{% if admin %}
+	<a href="{{entry.url}}/edit">edit</a> | <a href="{{entry.url}}/del">delete</a>
+	{% endif %}
+</div><!-- controls -->
 </div><!-- entry -->
 {% endblock %}

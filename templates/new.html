@@ -5,11 +5,15 @@
 <h1 id="logo"><a>TEH</a></h1>
 
 <form id="form5" class="wufoo topLabel" autocomplete="off"
-enctype="multipart/form-data" method="post" action="#public">
+enctype="multipart/form-data" method="post" action="">
 
 <div class="info">
+{% if not entry %}
 <h2>New Entry</h2>
 <p>create a new blog entry.</p>
+{% else %}
+<h2>Editing {{entry.title}}</h2>
+{% endif %}
 </div>
 
 <ul>
@@ -25,7 +29,7 @@ Title
 class="field text large"
 name="title" 
 tabindex="1"
-type="text" maxlength="255" value="" 
+type="text" maxlength="255" value="{{entry.title}}" 
   /> 
 </div>
 
@@ -46,16 +50,18 @@ Content
 class="field textarea large"
 name="body" 
 rows="10" cols="50" 
-tabindex="2"  ></textarea>
+tabindex="2"  >{{entry.body}}</textarea>
 </div>
 
 <p class="instruct " id="instruct1"><small>You can use markdown, reStructuredText or Textile.</small></p>
+</li>
 
-
+<li id="fo5li8" class="section    " >
+<h3 id="title8">More options</h3>
+<p id="instruct8">markdown, tags, static page</p>
 </li>
 
 <li class="   " id="fo5li3" >
-
 <label class="desc" id="title3" for="markup">
 Markup
 </label>
@@ -65,12 +71,13 @@ Markup
 <select class="field select medium" 
 id="markup" 
 name="markup"
-tabindex="3"  > 
-<option value="Markdown" 
+tabindex="3"  
+selected="{{entry.markdown}}"> 
+<option value="markdown" 
 >Markdown</option>
-<option value="Textile" 
+<option value="textile" 
 >Textile</option>
-<option value="Plain " 
+<option value="plain " 
 >Plain </option>
 </select>
 </div>
@@ -96,10 +103,25 @@ type="text" maxlength="255" value=""
 </div>
 
 <p class="instruct " id="instruct5"><small>Tags, separated by space</small></p>
-
-
 </li>
 
+<li class="   " id="fo5li112" >
+<label class="desc" id="title112">
+Static page
+</label>
+<span>
+<input id="Field112" 
+  name="static" 
+   class="field checkbox" type="checkbox" 
+{% if entry.static %}
+   checked="True"
+{% endif %}
+   value="1" 
+    tabindex="5"  />
+<label class="choice" for="static">dont show this entry in blog</label>
+</span>
+<p class="instruct " id="instruct112"><small>Use this option to create "About", "Contact" etc., pages. </small></p>
+</li>
 
 <li class="buttons">
 <input id="saveForm" class="btTxt" type="submit" tabindex="5" value="Submit"  />

@@ -5,7 +5,7 @@
 <p><em>Docs</em>: On the way</p>
 {% for entry in entries %}
 	<div class="entry">
-		<h3><a href="/entry/{{entry.slug}}">{{entry.title}}</a></h3>
+		<h3><a href="{{entry.url}}">{{entry.title}}</a></h3>
 		<div class="date">{{entry.published.date}}</div>
 		<div class="body">
 			<p>{{entry.excerpt}}</p>
