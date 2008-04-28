@@ -1,0 +1,29 @@
+{% extends "formbase.html" %}
+
+{% block content %}
+<form method="POST">
+	<div class="info">
+	<h2>Delete Entry</h2>
+	<p>{{entry.title}}</p>
+	</div>
+
+	<ul>
+	<li id="fo5li0" class="   " >
+
+	<label class="desc" id="title0" for="Field0">
+	Do you want to Delete this entry (Y/N)
+	<span id="req_0" class="req">*</span>
+	</label>
+
+	<div>
+	<input id="del" 
+	class="field text large"
+	name="del" 
+	tabindex="1"
+	type="text" maxlength="1" value="N" 
+	  /> 
+	</div>
+	<li class="buttons">
+	<input id="saveForm" class="btTxt" type="submit" tabindex="5" value="Submit"  />
+</form>
+{% endblock %}
