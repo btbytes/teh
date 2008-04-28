@@ -54,7 +54,7 @@ class EntryIndexHandler(TehRequestHandler):
         entries = Entry.all().filter("static =", False)
         entries.order('-published')
         entries.fetch(limit=5)
-        self.render("templates/entryindex.html", entries=entries, users=users)
+        self.render("templates/entryindex.html", entries=entries)
 
 class EntryHandler(TehRequestHandler):
     def get(self, slug):
@@ -62,7 +62,7 @@ class EntryHandler(TehRequestHandler):
         entry = db.Query(Entry).filter("slug =", slug).filter("static = ", False).get()
         if not entry:
             raise webapp.Error(404)
-        self.render("templates/entry.html", entry=entry,admin=admin)
+        self.render("templates/entry.html", entry=entry)
         
 class EntryDeleteHandler(TehRequestHandler):
         @administrator
@@ -89,7 +89,7 @@ class PageHandler(TehRequestHandler):
         entry = db.Query(Entry).filter("slug =", slug).filter("static =", True).get()
         if not entry:
             raise webapp.Error(404)
-        self.render("templates/page.html", entry=entry,admin=admin)
+        self.render("templates/page.html", entry=entry)
 
 class TagHandler(TehRequestHandler):
     def get(self, slug):

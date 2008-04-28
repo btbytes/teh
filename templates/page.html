@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="entry">
+	--{{user}}=--
 <h3><a href="{{entry.url}}">{{entry.title}}</a></h3>
 {% block date %}{% endblock %}
 <div class="body">
@@ -12,7 +13,7 @@
 </div><!-- tags -->
 </div><!-- body -->
 <div id="controls">
-	{% if admin %}
+	{% if users.is_current_user_admin %}
 	<a href="{{entry.url}}/edit">edit</a> | <a href="{{entry.url}}/del">delete</a>
 	{% endif %}
 </div><!-- controls -->
