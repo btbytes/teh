@@ -11,8 +11,8 @@ body {
 
 body, input, textarea {
   color: #222222;
-  font-family: Georgia, Serif;
-  font-size: 12pt;
+  font-family: Helvetica, Verdana, Sans-serif;
+  font-size: 1.0em;
 }
 
 img {

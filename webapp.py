@@ -54,6 +54,8 @@ def main():
         (r"/entry/([^/]+)", blog.EntryHandler),
         (r"/entry/([^/]+)/edit", blog.NewEntryHandler),
         (r"/entry/([^/]+)/del", blog.EntryDeleteHandler),
+        (r"/([^/]+)/edit", blog.NewEntryHandler),
+        (r"/([^/]+)/del", blog.EntryDeleteHandler),
         (r"/new", blog.NewEntryHandler),
         (r"/topic/([^/]+)", blog.TagHandler),
         (r"/shooin/([^/]+)", shooin.ShooinHandler),

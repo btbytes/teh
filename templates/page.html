@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="entry">
-<h3><a href="{{entry.url}}">{{entry.title}}</a></h3>
+<h1><a href="{{entry.url}}">{{entry.title}}</a></h1>
 {% block date %}{% endblock %}
 <div class="body">
 	{{entry.body_html}}
