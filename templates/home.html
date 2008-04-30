@@ -1,8 +1,5 @@
 {% extends "base.html" %}
 {% block content %}
-<p>Teh is a minimalist blog app written using Google App Engine.</p>
-<p><em>Source</em>: http://github.com/btbytes/teh/tree/master </p>
-<p><em>Docs</em>: On the way</p>
 {% for entry in entries %}
 	<div class="entry">
 		<h3><a href="{{entry.url}}">{{entry.title}}</a></h3>

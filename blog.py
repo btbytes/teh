@@ -53,8 +53,11 @@ class EntryIndexHandler(TehRequestHandler):
     def get(self):
         entries = Entry.all().filter("static =", False)
         entries.order('-published')
-        entries.fetch(limit=5)
-        self.render("templates/entryindex.html", entries=entries)
+        entries.fetch()
+        pages = Entry.all().filter("static =", True)
+        pages.order('-published')
+        pages.fetch()
+        self.render("templates/entryindex.html", entries=entries, pages=pages)
 
 class EntryHandler(TehRequestHandler):
     def get(self, slug):
