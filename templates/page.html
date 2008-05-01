@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+{% block title %}
+{{entry.title}}
+{% endblock %}
 {% block content %}
 <div class="entry">
 <h1><a href="{{entry.url}}">{{entry.title}}</a></h1>
@@ -11,10 +14,17 @@
 	{% endfor %}
 </div><!-- tags -->
 </div><!-- body -->
+<div id="disqus_thread"></div>
 <div id="controls">
 	{% if users.is_current_user_admin %}
 	<a href="{{entry.url}}/edit">edit</a> | <a href="{{entry.url}}/del">delete</a>
 	{% endif %}
 </div><!-- controls -->
 </div><!-- entry -->
+{% endblock %}
+
+{% block extrafooter %}
+	{% if config.disqus %}
+		<script type="text/javascript" src="http://disqus.com/forums/{{config.disqus}}/embed.js"></script>
+	{% endif %}
 {% endblock %}

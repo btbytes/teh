@@ -56,6 +56,12 @@ form {
   top: 15px;
 }
 
+#logo a span{
+    font-size:1.5em;
+    color:#fff;
+    text-decoration:none;
+}
+
 #feed {
   position: absolute;
   top: 12px;
@@ -98,7 +104,10 @@ form {
 }
 
 .full .entry h1 a,
-.full .entry h1 a:visited {
+.full .entry h1 a:visited,
+.full .entry h2 a,
+.full .entry h2 a:visited,
+ {
   text-decoration: none;
   color: #222222;
 }

@@ -7,6 +7,31 @@
 		<div class="body">
 			{{entry.body_html}}
 		</div><!-- body -->
+		{% if config.disqus %}
+			<div class="entrycomment">
+				<a href="{{entry.url}}#disqus_thread">Comments</a>
+			</div><!-- entrycomment -->
+		{% endif %}
 		</div><!-- entry -->
 {% endfor %}
+{% endblock %}
+
+{% block extrafooter %}
+{% if config.disqus %}
+	<script type="text/javascript">
+	//<![CDATA[
+	(function() {
+	var links = document.getElementsByTagName('a');
+	var query = '?';
+	for (var i = 0; i < links.length; i++) {
+	if (links[i].href.indexOf('#disqus_thread') >= 0) {
+	query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
+	}
+	}
+	document.write('<script type="text/javascript" src="http://disqus.com/forums/{{config.disqus}}/get_num_replies.js' + query + '"></' + 'script>');
+	})();
+	//]]>
+	</script>
+
+	{% endif %}
 {% endblock %}

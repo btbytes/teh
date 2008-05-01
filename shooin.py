@@ -16,7 +16,7 @@ from google.appengine.api import users
 from google.appengine.api import urlfetch
 import os
 from lib import utils, markdown2, BeautifulSoup
-from requesthandler import TehRequestHandler
+from utils import TehRequestHandler
 from blog import Entry
 from lib import demjson
 from StringIO import StringIO

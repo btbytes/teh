@@ -15,7 +15,7 @@ from google.appengine.api import users
 import functools
 import os
 from lib import utils, markdown2, BeautifulSoup
-from requesthandler import TehRequestHandler
+from utils import TehRequestHandler, administrator
 import shooin
 
 class Entry(db.Model):
@@ -35,20 +35,6 @@ class Entry(db.Model):
         if self.static == False: return '/entry/'+self.slug
         else: return '/'+self.slug
     
-def administrator(method):
-    @functools.wraps(method)
-    def wrapper(self, *args, **kwargs):
-        user = users.get_current_user()
-        if not user:
-            if self.request.method == "GET":
-                self.redirect(users.create_login_url(self.request.uri))
-                return
-        if not users.is_current_user_admin():
-            raise webapp.Error(403)
-        else:
-            return method(self, *args, **kwargs)
-    return wrapper
-
 class EntryIndexHandler(TehRequestHandler):
     def get(self):
         entries = Entry.all().filter("static =", False)

@@ -11,8 +11,3 @@ handlers:
 - url: /new
   script: webapp.py
   login: admin
-- url: /shooin
-  script: shooin.py
-  login: admin
-  
-  

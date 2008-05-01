@@ -1,0 +1,59 @@
+{% extends "formbase.html" %}
+
+{% block title %}
+	Blog configurations
+{% endblock %}
+
+{% block content %}
+<h1 id="logo"><a>TEH</a></h1>
+
+<form id="form5" class="wufoo topLabel" autocomplete="off"
+enctype="multipart/form-data" method="post" action="">
+
+<div class="info">
+<h2>Configuration</h2>
+<p>Configure your blog.</p>
+</div>
+
+<ul>
+<li id="item1" class="" >
+<label class="desc" id="title0" for="Field0">
+Title
+<span id="req_0" class="req">*</span>
+</label>
+<div>
+<input id="title" 
+class="field text large"
+name="title" 
+tabindex="1"
+type="text" maxlength="255" value="{{config.title}}" 
+  /> 
+</div>
+</li>
+<li id="item2" class="" >
+<label class="desc" id="disqus0" for="Field1">
+Disqus ID
+<span id="req_1" class="req">*</span>
+</label>
+<div>
+<input id="disqus" 
+class="field text large"
+name="disqus" 
+tabindex="1"
+type="text" maxlength="80" value="{{config.disqus}}" 
+  /> 
+</div>
+<p class="instruct " id="instruct2"><small>You can enable comment on your blog. Create a <a href="http://disqus.com">disqus</a> id if you dont have one.</small></p>
+</li>
+<li class="buttons">
+<input id="saveForm" class="btTxt" type="submit" tabindex="5" value="Submit"  />
+</li>
+
+<li style="display:none">
+<label for="comment">Do Not Fill This Out</label>
+<textarea name="comment" id="comment" rows="1" cols="1"></textarea>
+</li>
+
+</ul>
+
+{% endblock %}

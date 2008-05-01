@@ -2,9 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<title>
+<title>{{config.title}} | 
 	{% block title %}
-		TEH - minimalist blog tool powered by Google App Engine
+		minimalist blog tool powered by Google App Engine
 	{% endblock %}
 </title>
 {% block css %}
@@ -17,7 +17,10 @@
 <body>
 <div id="header">
 	<div id="logo">
-		<a href="/"><img src="/static/images/logo.png" alt="Teh blog"/></a> 
+		<a href="/">
+			<!-- img src="/static/images/logo.png" alt="Teh blog"/ -->
+			<span>{{config.title}}</span>
+			</a> 
 	</div><!-- logo -->
 	<div id="feed"><a href="http://teh.appspot.com/feed">
 		<img src="/static/images/feed.png" alt="Subscribe to this blog"/></a>
@@ -53,6 +56,9 @@
 
 <div id="footer">
 	&copy;2008 Teh blog - <a href="/about">About Teh</a> - <a href="http://creativecommons.org/licenses/by/2.5/">Creative Commons License</a>
+	{% block extrafooter %}
+		
+	{% endblock %}
 </div>
 <!-- 
 	Layout for Teh blog app - http://teh.appspot.com
