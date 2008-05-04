@@ -56,11 +56,6 @@ form {
   top: 15px;
 }
 
-#logo a span{
-    font-size:1.5em;
-    color:#fff;
-    text-decoration:none;
-}
 
 #feed {
   position: absolute;
@@ -102,7 +97,6 @@ form {
 .full .entry h1 {
   font-size: 20pt;
 }
-
 .full .entry h1 a,
 .full .entry h1 a:visited,
 .full .entry h2 a,
@@ -111,7 +105,11 @@ form {
   text-decoration: none;
   color: #222222;
 }
-
+/*
+h1 a, h1 a:visited, h2 a, h2 a:visited{
+    text-decoration:none;
+    color:#222222;
+}*/
 .full .entry .date {
   margin-top: 0.25em;
 }
@@ -173,4 +171,18 @@ ul {
 
 ul li {
   margin-bottom: 0.3em;
+}
+
+/* tech custom */
+
+#sitetitle{
+    font-size:1.5em;
+    color:#fff;
+    text-decoration:none;
+    
+}
+.entry h1 a,
+.entry h1 a:visited{
+    text-decoration:none;
+    color: #222222;
 }

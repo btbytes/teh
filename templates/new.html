@@ -123,6 +123,26 @@ Static page
 <p class="instruct " id="instruct112"><small>Use this option to create "About", "Contact" etc., pages. </small></p>
 </li>
 
+<li class="   " id="fo5li113" >
+<label class="desc" id="title113">
+Allow comments
+</label>
+<span>
+<input id="Field113" 
+  name="comments" 
+   class="field checkbox" type="checkbox" 
+{% if entry.comments %}
+   checked="True"
+{% endif %}
+{% if not entry %}
+	checked="True"  
+{% endif %}
+   value="1" 
+    tabindex="6"  />
+<label class="choice" for="static">Allow users to enter comments on this page.</label>
+</span>
+</li>
+
 <li class="buttons">
 <input id="saveForm" class="btTxt" type="submit" tabindex="5" value="Submit"  />
 </li>

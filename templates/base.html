@@ -8,6 +8,7 @@
 	{% endblock %}
 </title>
 {% block css %}
+	<link href="/static/css/blueprint/screen.css" rel="stylesheet" type="text/css"/>
 	<link href="/static/css/base.css" rel="stylesheet" type="text/css"/>
 {% endblock %}
 
@@ -17,10 +18,8 @@
 <body>
 <div id="header">
 	<div id="logo">
-		<a href="/">
-			<!-- img src="/static/images/logo.png" alt="Teh blog"/ -->
-			<span>{{config.title}}</span>
-			</a> 
+		<a href="/" id="sitetitle">
+			{{config.title}}</a> 
 	</div><!-- logo -->
 	<div id="feed"><a href="http://teh.appspot.com/feed">
 		<img src="/static/images/feed.png" alt="Subscribe to this blog"/></a>
@@ -39,22 +38,37 @@
 </div><!-- header -->
 
 <div id="body">
-<div class="full">
-
+<div class="full container">
 {% if message %}
 	{% block message %}
 		{{message}}
 	{% endblock %}
 {% endif %}
-
+<div class="span-15 prepend-1 colborder">
 {% block content %}
 {% endblock %}
+</div>
+<div class="span-7 last">
+	<ul>
+	<li><a href="/about">About</a></li>
+	<li><a href="/docs">Documentation</a></li>
+	<li><a href="/feed">Blog Feed</a></li>
+	</ul>
+<h3>Meta</h3>
+<p><small>Login required</small></p>
+<ul>
+<li><a href="/new">New Entry</li>
+<li><a href="/config">Blog Config</li>	
+</ul>
+	
+</div>
+
 </div><!-- full -->
 
-<div><a href="/entries">All posts</a></div>
+<div class="container"><a href="/entries">All posts</a></div>
 </div><!-- body -->
-
-<div id="footer">
+<hr>
+<div id="footer" class="container">
 	&copy;2008 Teh blog - <a href="/about">About Teh</a> - <a href="http://creativecommons.org/licenses/by/2.5/">Creative Commons License</a>
 	{% block extrafooter %}
 		

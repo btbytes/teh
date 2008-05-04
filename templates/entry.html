@@ -1,4 +1,5 @@
 {% extends "page.html" %}
+
 {% block date %}
-<div class="date">{{entry.published.date}}</div>
+	<div class="date">{{entry.published.date|date:"d M Y" }}</div>
 {% endblock %}

@@ -30,6 +30,7 @@ class Entry(db.Model):
     excerpt = db.TextProperty()
     tags = db.ListProperty(db.Category)
     static = db.BooleanProperty()
+    comments = db.BooleanProperty()
     
     def url(self):
         if self.static == False: return '/entry/'+self.slug
@@ -125,11 +126,12 @@ class NewEntryHandler(TehRequestHandler):
         body = self.request.get("body")
         markdown = self.request.get("markup")
         st  = self.request.get("static")
-        if st == '1':
-            static = True
-        else:
-            static = False
-            
+        cm  = self.request.get("comments")
+        if st == '1': static = True
+        else: static = False
+        if cm  == '1': comments = True
+        else: comments = False
+        
         tags = self.request.get("tags")
         tags = tags.split(' ')
         if len(tags) == 0:
@@ -157,6 +159,7 @@ class NewEntryHandler(TehRequestHandler):
                 excerpt=excerpt,
                 tags=tags,
                 static=static,
+                comments=comments,
             )
         else:
             entry.title = title
@@ -165,9 +168,8 @@ class NewEntryHandler(TehRequestHandler):
             entry.excerpt = excerpt
             entry.static = static
             entry.tags = tags
-            
+            entry.comments = comments
         entry.put()
-        
         if static:
             self.redirect('/'+entry.slug)
         else:

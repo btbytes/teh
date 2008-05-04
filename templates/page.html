@@ -4,9 +4,10 @@
 {% endblock %}
 {% block content %}
 <div class="entry">
-<h1><a href="{{entry.url}}">{{entry.title}}</a></h1>
-{% block date %}{% endblock %}
+	<h1><a href="{{entry.url}}">{{entry.title}}</a></h1>
+	{% block date %}{% endblock %}
 <div class="body">
+	
 	{{entry.body_html}}
 <div class="tags">
 	{% for tag in entry.tags %}
@@ -24,7 +25,11 @@
 {% endblock %}
 
 {% block extrafooter %}
+{% if entry.comments %}
+		
 	{% if config.disqus %}
 		<script type="text/javascript" src="http://disqus.com/forums/{{config.disqus}}/embed.js"></script>
 	{% endif %}
+{% endif %}
+
 {% endblock %}
