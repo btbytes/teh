@@ -16,8 +16,9 @@ from google.appengine.api import users
 import os
 from lib import utils, markdown2, BeautifulSoup
 from utils import TehRequestHandler, administrator, Config
-import shooin
 import blog
+import admin
+
 
 class LoginHandler(TehRequestHandler):
     def get(self):
@@ -42,25 +43,12 @@ class HomePageHandler(TehRequestHandler):
         entries.order('-published').fetch(limit=5)
         self.render("templates/home.html", entries=entries)
 
-class ConfigHandler(TehRequestHandler):
-    @administrator
-    def get(self):
-        self.render("templates/config.html")
-    @administrator    
-    def post(self):
-        config = Config.all()
-        config = config.fetch(1)[0]
-        config.title = self.request.get("title")
-        config.disqus = self.request.get("disqus")
-        config.put()
-        self.redirect('/')
         
 def main():
     application = webapp.WSGIApplication([
         (r"/", HomePageHandler),
         (r"/login", LoginHandler),
         (r"/logout", LogoutHandler),
-        (r"/config", ConfigHandler),
 
         (r"/entries", blog.EntryIndexHandler),
         (r"/feed", blog.FeedHandler),
@@ -69,9 +57,14 @@ def main():
         (r"/entry/([^/]+)/del", blog.EntryDeleteHandler),
         (r"/([^/]+)/edit", blog.NewEntryHandler),
         (r"/([^/]+)/del", blog.EntryDeleteHandler),
-        (r"/new", blog.NewEntryHandler),
         (r"/topic/([^/]+)", blog.TagHandler),
-        (r"/shooin/([^/]+)", shooin.ShooinHandler),
+        
+        (r"/admin", admin.AdminHandler),
+        (r"/admin/new", blog.NewEntryHandler),
+        (r"/admin/config", admin.ConfigHandler),
+        (r"/admin/entrylist", admin.EntryListHandler),
+
+       # (r"/shooin/([^/]+)", shooin.ShooinHandler),
         (r"/([^/]+)", blog.PageHandler),
         ], debug=True)
     

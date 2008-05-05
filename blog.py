@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # encoding: utf-8
 """
-webapp.py
+blog.py
 
 Created by Pradeep Gowda on 2008-04-23.
 Copyright (c) 2008 Yashotech. All rights reserved.
@@ -16,7 +16,7 @@ import functools
 import os
 from lib import utils, markdown2, BeautifulSoup,textile
 from utils import TehRequestHandler, administrator
-import shooin
+
 
 class Entry(db.Model):
     author = db.UserProperty()
@@ -119,8 +119,8 @@ class NewEntryHandler(TehRequestHandler):
             entry = db.Query(Entry).filter("slug =", slug).get()
             if not entry:
                 raise webapp.Error(404)
-            self.render("templates/new.html", entry=entry)
-        else: self.render("templates/new.html")
+            self.render("templates/entry_edit.html", entry=entry)
+        else: self.render("templates/entry_edit.html")
         
     @administrator
     def post(self,slug=None):

@@ -1,8 +1,15 @@
 {% extends "formbase.html" %}
 
-{% block content %}
+{% block entry %}
+{% if not entry %}  
+  New Entry
+{% else %}
+  Editing {{entry.title}}
+{% endif %}
 
-<h1 id="logo"><a>TEH</a></h1>
+{% endblock %}
+
+{% block content %}
 
 <form id="form5" class="wufoo topLabel" autocomplete="off"
 enctype="multipart/form-data" method="post" action="">
