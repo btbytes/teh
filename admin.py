@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # encoding: utf-8
 """
-webapp.py
+admin.py
 
-Created by Pradeep Gowda on 2008-05-23.
+Created by Pradeep Gowda on 2008-05-04.
 Copyright (c) 2008 Yashotech. All rights reserved.
 """
 import wsgiref.handlers
@@ -15,8 +15,14 @@ from google.appengine.api import users
 from utils import TehRequestHandler, administrator
 
 class AdminHandler(TehRequestHandler):
+    @administrator
     def get(self):
         self.render("templates/admin.html")
+
+class EntryListHandler(TehRequestHandler):
+    @administrator
+    def get(self):
+        self.render("templates/admin_entrylist.html")
 
 class ConfigHandler(TehRequestHandler):
     @administrator
