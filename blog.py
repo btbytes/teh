@@ -170,7 +170,4 @@ class NewEntryHandler(TehRequestHandler):
             entry.tags = tags
             entry.comments = comments
         entry.put()
-        if static:
-            self.redirect('/'+entry.slug)
-        else:
-            self.redirect("/entry/" + entry.slug)
+        self.redirect(entry.url)
