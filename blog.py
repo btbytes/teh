@@ -106,7 +106,7 @@ def to_html(body,markdown):
     if markdown == 'markdown':
         body_html = markdown2.markdown(body)
     elif markdown == 'textile':
-        body_html = textile.textile(body)
+        body_html = textile.textile(body,)
     else:
         body_html = body
     return body_html
@@ -172,4 +172,4 @@ class NewEntryHandler(TehRequestHandler):
             entry.tags = tags
             entry.comments = comments
         entry.put()
-        self.redirect(entry.url)
+        self.redirect(entry.url())

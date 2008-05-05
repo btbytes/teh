@@ -71,13 +71,19 @@ Markup
 <select class="field select medium" 
 id="markup" 
 name="markup"
-tabindex="3"  
-selected="{{entry.markdown}}"> 
-<option value="markdown" 
->Markdown</option>
-<option value="textile" 
+tabindex="3"> 
+<option
+  {% ifequal  entry.markdown "markdown" %}
+  SELECTED
+  {% endifequal %}
+  value="markdown">Markdown</option>
+<option {% ifequal  entry.markdown "textile" %}
+  SELECTED{% endifequal  %}
+  value="textile" 
 >Textile</option>
-<option value="plain " 
+<option {% ifequal  entry.markdown "plain" %}
+  SELECTED{% endifequal  %}
+  value="plain " 
 >Plain </option>
 </select>
 </div>

@@ -847,7 +847,7 @@ class Textiler:
         text = self.footnotes(text)
 
         # Convert to desired output.
-        text = unicode(text, encoding)
+        #TEH#text = unicode(text, encoding)
         text = text.encode(output, 'xmlcharrefreplace')
 
         # Sanitize?
@@ -2414,8 +2414,8 @@ class Textiler:
         text = re.sub(r'''{([^}]+)}''', self.macros, text)
 
         # LaTeX style quotes.
-        text = text.replace('\x60\x60', '&#8220;')
-        text = text.replace('\xb4\xb4', '&#8221;')
+        #TEH#text = text.replace('\x60\x60', '&#8220;')
+        #TEH#text = text.replace('\xb4\xb4', '&#8221;')
 
         # Linkify URL and emails.
         url = r'''(?=[a-zA-Z0-9./#])                          # Must start correctly
