@@ -14,7 +14,7 @@ from google.appengine.ext.webapp import template
 from google.appengine.api import users
 import functools
 import os
-from lib import utils, markdown2, BeautifulSoup
+from lib import utils, markdown2, BeautifulSoup,textile
 from utils import TehRequestHandler, administrator
 import shooin
 
@@ -105,6 +105,8 @@ class FeedHandler(TehRequestHandler):
 def to_html(body,markdown):
     if markdown == 'markdown':
         body_html = markdown2.markdown(body)
+    elif markdown == 'textile':
+        body_html = textile.textile(body)
     else:
         body_html = body
     return body_html
