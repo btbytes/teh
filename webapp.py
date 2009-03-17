@@ -3,8 +3,8 @@
 """
 webapp.py
 
-Created by Pradeep Gowda on 2008-04-23.
-Copyright (c) 2008 Yashotech. All rights reserved.
+entry point for teh blog app
+Copyright (c) 2009 Pradeep Gowda.
 """
 import wsgiref.handlers
 
