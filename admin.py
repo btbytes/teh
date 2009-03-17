@@ -13,6 +13,7 @@ from google.appengine.ext import db
 from google.appengine.ext.webapp import template
 from google.appengine.api import users
 from utils import TehRequestHandler, administrator
+from blog import Entry
 
 class AdminHandler(TehRequestHandler):
     @administrator
@@ -22,7 +23,9 @@ class AdminHandler(TehRequestHandler):
 class EntryListHandler(TehRequestHandler):
     @administrator
     def get(self):
-        self.render("templates/admin_entrylist.html")
+        entries = Entry.all().order("-published")
+        self.render("templates/admin_entrylist.html",
+            entries=entries)
 
 class ConfigHandler(TehRequestHandler):
     @administrator

@@ -1,6 +1,35 @@
 {% extends "formbase.html" %}
 
+{% block title %}Entries {% endblock %}
 {% block content %}
-<h2>Entries</h2>
+<h2>Entries</h2>    
+<table id="entries" width="100%">   
+	<tr>
+	  <td>Edit</td>
+	  <td>Published date</td> 
+	  <td>View</td>
+    </tr>
+{% for entry in entries %} 
+<tr>
+	<td>
+  {% if entry.static %}
+    <a href="/{{entry.slug}}/edit">{{entry.title}}</a>
+  {% endif %}           
+  {% if not entry.static %}
+    <a href="/entry/{{entry.slug}}/edit">{{entry.title}}</a>
+  {% endif %} 
+  </td>
+  <td>{{entry.published|date:"Y-m-d"}}</td>
+	<td>
+  {% if entry.static %}
+    <a href="/{{entry.slug}}">&raquo;</a>
+  {% endif %}           
+  {% if not entry.static %}
+    <a href="/entry/{{entry.slug}}">&raquo;</a>
+  {% endif %} 
+  </td>
 
+</tr>
+{% endfor %}
+ </table>
 {% endblock %}
